@@ -92,7 +92,7 @@ const EXPERIMENT_NAME = 'experimentX'
 
 const MyComponent = () => {
   return (
-    <Experiment experimentName={EXPERIMENT_NAME}>
+    <Experiment experimentName={EXPERIMENT_NAME} adapterId="default">
       {({variation}) => variation === 'variationB' ? <MyVariationB /> : <MyVariationA>}
     </Experiment>
   )
@@ -180,20 +180,26 @@ const MyComponent = () => {
 
 You can also use `Feature` component which takes the following optional props
 
-- `featureName`
+- `featureKey` (required)
 - `attributes`
 - `queryString`
+- `adapterId`
+- `shouldTrackExperimentViewed`
 
 ```js
 import {Feature} from '@s-ui/pde'
 
 const MyComponent = () => {
   return (
-    <Feature featureKey="myFeatureKey">
+    <Feature 
+      featureKey="myFeatureKey" 
+      adapterId="default" 
+      shouldTrackExperimentViewed={false}
+    >
       {({isActive}) => (
         <p>The feature 'myFeatureKey' is {isActive ? 'active' : 'inactive'}</p>
       )}
-    </Experiment>
+    </Feature>
   )
 }
 ```
